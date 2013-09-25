@@ -1,4 +1,4 @@
-package DesigneFrameDetailAnimeView;
+package hot.lib.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
