@@ -2,10 +2,12 @@ package DesigneFrameDetailAnimeView;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class SurfaceThread extends SurfaceView	implements Runnable, SurfaceHolder.Callback {
+
 
 	/** FPS設定 */
 	static final long FPS = 20;
@@ -21,6 +23,20 @@ public class SurfaceThread extends SurfaceView	implements Runnable, SurfaceHolde
 
 	public SurfaceThread(Context context) {
 		super(context);
+		setup();
+		
+	}
+	public SurfaceThread(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		setup();
+	}
+
+	public SurfaceThread(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		setup();
+	}	
+	
+	private void setup(){
 		surfaceHolder = getHolder();
 		surfaceHolder.addCallback(this);		
 	}
