@@ -1,5 +1,7 @@
 package hot.lib.media;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.ContentResolver;
@@ -15,18 +17,19 @@ import android.provider.MediaStore;
 public class MediaStoreHelper {
 
 	private Context mContext;
+	private ContentResolver mResolver;
 
 	public MediaStoreHelper(Context context) {
 		mContext = context;
+		 mResolver = mContext.getContentResolver();
 	}
 	
 	public ArrayList<Uri> getImageContentUri(){
 		ArrayList<Uri> result = new ArrayList<Uri>();
 		
 		// 画像リストを取得するクエリを発行
-		ContentResolver resolver = mContext.getContentResolver();
 		String sortOrder = MediaStore.Images.Media.DATE_TAKEN + " DESC";
-		Cursor cursor = resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, sortOrder);
+		Cursor cursor = mResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, sortOrder);
 		
 		try{
 			cursor.moveToFirst();
@@ -42,4 +45,18 @@ public class MediaStoreHelper {
 		}
 		return result;
 	}
+	
+	/**
+	 * uriをinputStreamに変換する
+	 * @param uri
+	 * @return 対象ファイルが存在しない場合はnullを返す
+	 */
+	public InputStream uriToInputStream(Uri uri){
+		try {
+			return mResolver.openInputStream(uri);
+		} catch (FileNotFoundException e) {
+			return null;
+		}
+	}
+	
 }
