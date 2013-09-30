@@ -26,7 +26,7 @@ public class TraceTimes {
 	}
 	
 	public void printTrace(String key){
-		System.out.println("TRACE TIME<"+key+">:"+mTraceMap.get(key).calcTime()+" msec");
+		System.out.println("TRACE TIME<"+key+">:"+calcTrace(key)+" msec");
 	}
 
 }
